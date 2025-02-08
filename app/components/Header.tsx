@@ -19,80 +19,77 @@ export default function Header() {
   };
 
   return (
-    <div className="navbar bg-base-300 sticky top-0 z-40">
-      <div className="container mx-auto">
-        <div className="flex-1 px-2 lg:flex-none">
+    <div className="navbar bg-base-300 sticky top-0 z-40 shadow-md">
+      <div className="container mx-auto flex items-center justify-between px-4 py-2">
+        <div className="flex items-center">
           <Link
             href="/"
-            className="btn btn-ghost text-xl gap-2 normal-case font-bold"
+            className="flex items-center gap-2 text-xl font-bold text-gray-800 hover:text-gray-600"
             prefetch={true}
             onClick={() =>
               showNotification("Welcome to ImageKit ReelsPro", "info")
             }
           >
-            <Home className="w-5 h-5" />
+            <Home className="w-6 h-6" />
             ImageKit ReelsPro
           </Link>
         </div>
-        <div className="flex flex-1 justify-end px-2">
-          <div className="flex items-stretch gap-2">
-            <div className="dropdown dropdown-end">
-              <div
-                tabIndex={0}
-                role="button"
-                className="btn btn-ghost btn-circle"
-              >
-                <User className="w-5 h-5" />
-              </div>
-              <ul
-                tabIndex={0}
-                className="dropdown-content z-[1] shadow-lg bg-base-100 rounded-box w-64 mt-4 py-2"
-              >
-                {session ? (
-                  <>
-                    <li className="px-4 py-1">
-                      <span className="text-sm opacity-70">
-                        {session.user?.email?.split("@")[0]}
-                      </span>
-                    </li>
-                    <div className="divider my-1"></div>
 
-                    <li>
-                      <Link
-                        href="/upload"
-                        className="px-4 py-2 hover:bg-base-200 block w-full"
-                        onClick={() =>
-                          showNotification("Welcome to Admin Dashboard", "info")
-                        }
-                      >
-                        Video Upload
-                      </Link>
-                    </li>
+        <div className="flex items-center gap-4">
+          <div className="dropdown dropdown-end relative">
+            <button
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-circle p-2 focus:outline-none focus:ring focus:ring-gray-300"
+            >
+              <User className="w-6 h-6 text-gray-800" />
+            </button>
+            <ul
+              tabIndex={0}
+              className="dropdown-content absolute right-0 mt-2 w-64 bg-white border border-gray-200 rounded-md shadow-lg py-2"
+            >
+              {session ? (
+                <>
+                  <li className="px-4 py-2 text-sm text-gray-600">
+                    {session.user?.email?.split("@")[0]}
+                  </li>
+                  <div className="divider border-t my-2"></div>
 
-                    <li>
-                      <button
-                        onClick={handleSignOut}
-                        className="px-4 py-2 text-error hover:bg-base-200 w-full text-left"
-                      >
-                        Sign Out
-                      </button>
-                    </li>
-                  </>
-                ) : (
                   <li>
                     <Link
-                      href="/login"
-                      className="px-4 py-2 hover:bg-base-200 block w-full"
+                      href="/upload"
+                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-md"
                       onClick={() =>
-                        showNotification("Please sign in to continue", "info")
+                        showNotification("Welcome to Admin Dashboard", "info")
                       }
                     >
-                      Login
+                      Video Upload
                     </Link>
                   </li>
-                )}
-              </ul>
-            </div>
+
+                  <li>
+                    <button
+                      onClick={handleSignOut}
+                      className="block w-full text-left px-4 py-2 text-red-600 hover:bg-red-50 rounded-md"
+                    >
+                      Sign Out
+                    </button>
+                  </li>
+                </>
+              ) : (
+                <li>
+                  <Link
+                    href="/login"
+                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-md"
+                    onClick={() =>
+                      showNotification("Please sign in to continue", "info")
+                    }
+                  >
+                    Login
+                  </Link>
+                </li>
+              )}
+            </ul>
           </div>
         </div>
       </div>
